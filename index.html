@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<title>Lilycam</title>
+<title>Darkroom</title>
 <meta name="description" content="A little disposable camera. Photos develop later.">
 <meta name="theme-color" content="#1b1714">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Lilycam">
+<meta name="apple-mobile-web-app-title" content="Darkroom">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -169,7 +169,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;paddin
   <button id="gear" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
   <div class="plate">
     <div class="toprow">
-      <div class="brand">LILYCAM<small id="rollLabel">ROLL 1 · 27 EXP</small></div>
+      <div class="brand">DARKROOM<small id="rollLabel">ROLL 1 · 27 EXP</small></div>
       <div class="counter">
         <div class="lcd"><span id="shots">27</span><small>LEFT</small></div>
         <div class="wheel" id="wheel"></div>
@@ -181,7 +181,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;paddin
         <div class="stock" id="stockTag">GOLDEN 400</div>
         <div class="blink" id="blink"></div>
         <div class="camerr" id="camerr">
-          <div id="camerrMsg">Lilycam needs your camera to take pictures.</div>
+          <div id="camerrMsg">Darkroom needs your camera to take pictures.</div>
           <button id="camRetry">Turn on camera</button>
         </div>
       </div>
@@ -195,16 +195,16 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;paddin
   </div>
 </section>
 
-<!-- ============ DARKROOM ============ -->
+<!-- ============ PRINTS (gallery) ============ -->
 <section id="room" class="view">
-  <h1>Darkroom</h1>
+  <h1>Prints</h1>
   <div class="sub" id="roomSub">Your photos, once they've developed.</div>
   <div id="roomBody"></div>
 </section>
 
 <nav id="tabs">
   <button id="tabCam" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M7 7l1.5-3h4L14 7"/></svg>Camera</button>
-  <button id="tabRoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="16" cy="8" r="1.6"/></svg>Darkroom<span class="badge" id="badge">0</span></button>
+  <button id="tabRoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="16" cy="8" r="1.6"/></svg>Prints<span class="badge" id="badge">0</span></button>
 </nav>
 
 <div id="flashScreen"></div>
@@ -256,7 +256,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;paddin
 
 <script>
 /* =========================================================
-   Lilycam — a disposable-camera PWA. Everything stays on the phone.
+   Darkroom — a disposable-camera PWA. Everything stays on the phone.
    ========================================================= */
 const GIFT_NOTE = "for Lily ♡ — take pictures of everything";
 
@@ -325,7 +325,7 @@ let stream = null, facing = 'environment', flash = false, busy = false;
 async function startCamera() {
   stopCamera();
   $('#camerr').classList.remove('on');
-  if (!navigator.mediaDevices?.getUserMedia) return camError("This browser can't use the camera. Open Lilycam in Safari.");
+  if (!navigator.mediaDevices?.getUserMedia) return camError("This browser can't use the camera. Open Darkroom in Safari.");
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio:false,
       video:{ facingMode:{ ideal:facing }, width:{ ideal:2560 }, height:{ ideal:1920 } } });
@@ -652,7 +652,7 @@ document.addEventListener('keydown', e => {
 async function shareMany(ps) {
   const files = ps.map(p => {
     const d = new Date(p.takenAt), stamp = d.toISOString().slice(0, 19).replace(/[T:]/g, '-');
-    return new File([p.full], `lilycam-${stamp}.jpg`, { type:'image/jpeg' });
+    return new File([p.full], `darkroom-${stamp}.jpg`, { type:'image/jpeg' });
   });
   try {
     if (navigator.canShare && navigator.canShare({ files })) { await navigator.share({ files }); return; }

@@ -1,4 +1,4 @@
-# draws the Lilycam app icon: a little cream disposable camera on a warm orange tile
+# draws the Darkroom app icon: a little cream disposable camera on a warm orange tile
 from PIL import Image, ImageDraw, ImageFilter
 S = 1024
 im = Image.new('RGB', (S, S), (226, 87, 43))

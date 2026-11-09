@@ -1,6 +1,6 @@
 {
-  "name": "Lilycam",
-  "short_name": "Lilycam",
+  "name": "Darkroom",
+  "short_name": "Darkroom",
   "description": "A little disposable camera. Photos develop later.",
   "start_url": "./",
   "scope": "./",
